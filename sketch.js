@@ -1,44 +1,40 @@
-var canvas, backgroundImage;
+var player;
+var mountain;
+function setup(){
+    var canvas = createCanvas(400,400);
+   
 
-var gameState = 0;
-var playerCount;
-var allPlayers;
-var distance = 0;
-var database;
+mountain = createSprite(200,200,800,800);
+mountain.shapeColor = "blue";
+mountain.velocityY = 4;
+mountain.x = mountain.width/2;
 
-var form, player, game;
-
-var cars, car1, car2, car3, car4;
-
-var track, car1_img, car2_img, car3_img, car4_img;
+player = createSprite(200,200,20,20);
+player.shapeColor = "red";
+}
 
 function preload(){
-  track = loadImage("../images/track.jpg");
-  car1_img = loadImage("../images/car1.png");
-  car2_img = loadImage("../images/car2.png");
-  car3_img = loadImage("../images/car3.png");
-  car4_img = loadImage("../images/car4.png");
-  ground = loadImage("../images/ground.png");
 }
-
-function setup(){
-  canvas = createCanvas(displayWidth - 20, displayHeight-30);
-  database = firebase.database();
-  game = new Game();
-  game.getState();
-  game.start();
-}
-
 
 function draw(){
-  if(playerCount === 4){
-    game.update(1);
+    background(0);
+   
+   if(keyDown("space")){
+       player.velocityY = -10;
+   }
+
+   player.velocityY= player.velocityY + 0.8;
+
+  if(mountain.y>400){
+mountain.y = mountain.width/2;
   }
-  if(gameState === 1){
-    clear();
-    game.play();
-  }
-  if(gameState === 2){
-    game.end();
-  }
+spawnPaddles();
+    drawSprites();
+};
+function spawnPaddles(){
+    if(World .frameCount%40===0){
+        var paddle = createSprite(200,0,40,10);
+        paddle.velocityY = 4;
+
+    }
 }
